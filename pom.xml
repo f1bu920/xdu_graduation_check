@@ -47,28 +47,30 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- 打包时加载本地jar包-->
+        <!-- 加载本地jar包-->
         <dependency>
             <groupId>com.xidian</groupId>
             <artifactId>xdu_graudation_check</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>3.2.1</version>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/cas-client-core-3.2.1.jar</systemPath>
+            <systemPath>${project.basedir}/src/main/resources/lib/cas-client-core-3.2.1.jar</systemPath>
         </dependency>
     </dependencies>
 
     <build>
-        <!-- 引入本地jar包       -->
-        <resources>
-            <resource>
-                <directory>lib</directory>
-                <targetPath>BOOT-INF/lib/</targetPath>
-                <includes>
-                    <include>**/*.jar</include>
-                </includes>
-            </resource>
-        </resources>
         <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <encoding>UTF-8</encoding>
+                    <compilerArguments>
+                        <extdirs>${project.basedir}/src/main/resources/lib</extdirs>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
+
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
